@@ -1,4 +1,4 @@
-# Delete LinkedIn skills in Bulk
+# Delete LinkedIn skills in bulk
 
 A browser script that safely deletes your LinkedIn skills in bulk — while automatically protecting skills that have endorsements or are linked to your work experience and education.
 
