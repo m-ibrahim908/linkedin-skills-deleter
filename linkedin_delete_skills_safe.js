@@ -278,23 +278,28 @@ async function run() {
   }
 
   // Execute deletions on profile page — no navigation, no iframes
-  log('Scan complete. Executing deletions...');
+  const toDeleteList = table.filter(r => r.shouldDelete);
+  const total = toDeleteList.length;
+  let current = 0;
+
+  log(`Scan complete. ${total} skill(s) to delete. Starting...`);
   let consecutiveFails = 0;
   const CONSECUTIVE_FAIL_LIMIT = DELAYS.consecutiveFailLimit;
 
   for (const row of table) {
     if (!row.shouldDelete) continue;
-    log(`Deleting: "${row.skillName}"`);
+    current++;
+    log(`[${current} of ${total}] Deleting: "${row.skillName}"`);
     const success  = await deleteSkill(row.skillName, row.element);
     row.deleted     = success;
     row.deleteFailed = !success;
 
     if (success) {
-      consecutiveFails = 0; // reset on success
-      log(`✅ Deleted "${row.skillName}"`);
+      consecutiveFails = 0;
+      log(`[${current} of ${total}] ✅ Deleted "${row.skillName}"`);
     } else {
       consecutiveFails++;
-      log(`⚠️  Failed  "${row.skillName}" (${consecutiveFails} consecutive fail${consecutiveFails > 1 ? 's' : ''})`);
+      log(`[${current} of ${total}] ⚠️  Failed  "${row.skillName}" (${consecutiveFails} consecutive fail${consecutiveFails > 1 ? 's' : ''})`);
       if (consecutiveFails >= CONSECUTIVE_FAIL_LIMIT) {
         log('');
         log('🚨 STOPPING — 3 consecutive failures detected.');
@@ -313,9 +318,7 @@ async function run() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ───────── CONFIG ─────────
-
-// DEVELOPER CONFIG
+// ─── CONFIG — edit these before running, then paste the whole script ─────────
 
 const DELAYS = {
   afterClickDelete:   200,  // ms after clicking Delete skill button before looking for confirm
@@ -329,19 +332,13 @@ const DELAYS = {
   consecutiveFailLimit: 3  // stop if this many deletions fail in a row (likely bot detection)
 };
 
-
-// ─────────────────────────────────────────────────────────────────────────────
-// USER CONFIG
-// ─────────────────────────────────────────────────────────────────────────────
-
 const CONFIG = {
-  dryRun:           true,  // true = build table only, no deletion. When set to false deletion will happen and all skills will be displayed after deletion in summary
+  dryRun:           true,  // true = build table only, no deletion
   deleteEndorsed:   false, // true = also delete endorsed skills
   deleteAssociated: false, // true = also delete skills tied to experience/education
   count:            10     // number of skills to process — set to null to run all
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
 // ─────────────────────────────────────────────────────────────────────────────
 
 run(); // do not edit below this line
