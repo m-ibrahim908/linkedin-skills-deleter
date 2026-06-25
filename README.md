@@ -22,12 +22,12 @@ You need **Google Chrome** and a LinkedIn account. No installs required.
 
 ## Step 1 — Open your LinkedIn profile
 
-Go to your LinkedIn profile page. It should look like:
+Go to your LinkedIn profile page and then the skills section towards the end of the page. Click Show all. Or use the below URL format, the page URL should look like:
 ```
-https://www.linkedin.com/in/[your-username]/skills/
+https://www.linkedin.com/in/[your-username]/details/skills/
 ```
 
-Scroll all the way down and make sure you can see all your Skills on the page.
+Scroll all the way down and make sure you can see all your Skills loaded on the page.
 
 ---
 
@@ -132,7 +132,7 @@ LinkedIn may have detected the automation. Close the console, wait 10–15 minut
 This is a display issue only — the skill was deleted but the confirmation message was missed. Refresh your profile to verify.
 
 **Nothing happens after pasting**
-Make sure the console dropdown says `top` and that you are on your LinkedIn profile page (`/in/your-username/skills/`).
+Make sure the console dropdown says `top` and that you are on your LinkedIn profile page (`/in/your-username/details/skills/`).
 
 ---
 
