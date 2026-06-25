@@ -94,7 +94,7 @@ Once you are happy with the dry run summary:
 4. Watch the console — you will see each skill being deleted in real time
 5. A green summary box will appear when finished
 
-> ⚠️ **Deletions cannot be undone.** Endorsements on deleted skills are lost permanently.
+> ⚠️ **Deletions cannot be undone.** Endorsements on deleted skills are lost permanently. Console will also loose logs after closing so best if you copy paste your skills from the summary to refer again what the profile had.
 
 ---
 
